@@ -41,13 +41,11 @@ namespace yaifViewer
 
         public int[] getNibbles(int offset)
         {
-           
+
             int n1 = Program.inputFile[offset] & 0x0f;
             int n2 = Program.inputFile[offset] >> 4;
             int[] nibbles = { n1, n2 };
             return nibbles;
-            
-            
         }
         public int[,] getImage() {
             int[] dc_image = new int[image_width * image_height];
