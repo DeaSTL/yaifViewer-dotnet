@@ -18,7 +18,8 @@ namespace yaifViewer
         {
             if (args.Length == 0)
             {
-                inputFile = File.ReadAllBytes("stripping.yaif");
+                System.Environment.Exit(0);
+                
 
             }
             else
