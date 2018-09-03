@@ -19,6 +19,8 @@ namespace yaifViewer
         private int file_size;
         private int image_start;
         private int palette_start;
+        private int version_number;
+        private String file_type;
         private int[,] palette;
         private int[,] image;
 
@@ -37,6 +39,15 @@ namespace yaifViewer
         public int get8BitInt(int offset)
         {
             return Program.inputFile[offset];
+        }
+        public String getString(int offset, int length) {
+            String output = "";
+            for (int i = 0; i < length; i++)
+            {
+                output += Program.inputFile[i + offset].ToString();
+
+            }
+            return output;
         }
 
         public int[] getNibbles(int offset)
@@ -64,6 +75,7 @@ namespace yaifViewer
             }
             return output;
         }
+        
         public int[,] getPalette() {
             int[,] output = new int[palette_size / 3, 3];
             for (int i = 0; i < palette_size; i+=3) {
@@ -82,12 +94,14 @@ namespace yaifViewer
             InitializeComponent();
             
             this.DoubleBuffered = true;
-            image_width = get16BitInt(0);
-            image_height = get16BitInt(2);
-            palette_size = get8BitInt(4);
-            image_size = get32BitInt(5);
-            file_size = get32BitInt(9);
-            palette_start = 13;
+            file_type = getString(0,4);
+            version_number = get16BitInt(0x4);
+            image_width = get16BitInt(0x6);
+            image_height = get16BitInt(0x8);
+            palette_size = get8BitInt(0xA);
+            image_size = get32BitInt(0xB);
+            file_size = get32BitInt(0x11);
+            palette_start = 0x13;
             image_start = palette_start + palette_size;
             ImageBox.Image = new Bitmap(image_width, image_height);
             

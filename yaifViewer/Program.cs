@@ -18,8 +18,8 @@ namespace yaifViewer
         {
             if (args.Length == 0)
             {
-
-                System.Environment.Exit(0);
+                inputFile = File.ReadAllBytes("image.yaif");
+                //System.Environment.Exit(0);
             }
             else
             {
